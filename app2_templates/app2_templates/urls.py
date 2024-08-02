@@ -19,8 +19,16 @@ from django.urls import path
 
 from movies.views import home, top_movies
 
+
+"""
+NOTE: 
+When the user visits `favorites/` django redirects it to the `top_movies()` view.
+Now, if inside our app, we want to redirect to the `top_views()` we will use the `name` corresponding to the `path`
+For example:
+    <a href="{% url 'top-movies' %}">TopMovies</a>
+"""
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name= 'home'),
-    path('favorites/', top_movies, name= 'top-movies')
+    path('favorites/', top_movies, name= 'top-movies'),
 ]
