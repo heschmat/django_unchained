@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load humanize %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Postings</title>
+  </head>
+  <body>
+    {% if jobs %}
+    <ul>
+      {% for job in jobs %}
+      <li>{{job.title|title}} | {{job.company}} | ${{job.salary|intcomma}}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No active jobs listed!</p>
+    {% endif %}
+  </body>
+</html>
