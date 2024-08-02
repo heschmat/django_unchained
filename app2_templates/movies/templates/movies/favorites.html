@@ -1,0 +1,18 @@
+{% extends "movies/_base.html" %}
+
+<div>{% block title %}Top Movies{% endblock title %}</div>
+
+{% block content %}
+<div>
+  {% if movies %}
+  <h2>Our top movies list are:</h2>
+  <ul>
+    {% for movie in movies %}
+    <li>{{ movie|title }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No movies listed.</p>
+  {% endif %}
+</div>
+{% endblock content %}

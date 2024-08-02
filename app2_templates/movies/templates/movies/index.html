@@ -1,0 +1,20 @@
+<!-- templates/movies/index.html -->
+{% extends "movies/_base.html" %} {% load static %}
+
+<div>{% block title %} Movie Recommendation {% endblock %}</div>
+
+{% block content %}
+<style>
+  body {
+    background-image: url("{% static 'movies/sala_de_cine.jpg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  h2 {
+    color: blue;
+  }
+</style>
+<h2>Movie of the night: {{movie}}</h2>
+{% endblock %}
