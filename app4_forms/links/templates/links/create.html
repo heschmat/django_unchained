@@ -1,0 +1,27 @@
+{% extends "links/_base.html" %} {% load tailwind_filters %} {% block content %}
+<div class="sm:w-3/4 mx-auto">
+  <form action="" method="POST">
+    {% csrf_token %} {% if form %}
+    <div>{{ form|crispy }}</div>
+
+    {% else %}
+    <label for="">Name</label>
+    <input type="text" name="name" />
+
+    <label for="">URL</label>
+    <input type="text" name="url" />
+
+    <label for="">Slug</label>
+    <input type="text" name="slug" />
+    {% endif %}
+    <br />
+    {% comment %} <input type="submit" value="create" /> {% endcomment %}
+    <button
+      class="rounded px-5 py-2 bg-green-300 hover:cursor-pointer"
+      type="submit"
+    >
+      Create
+    </button>
+  </form>
+</div>
+{% endblock content %}
