@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -46,4 +46,14 @@ class LinkDeleteView(DeleteView):
     success_url = reverse_lazy('link-list')
     # by default form to submit in order to delete the item
     # expects a template: `model_confirm_delete.html`
-    
+
+def profile_view(req, profile_slug):
+    profile = get_object_or_404(Profile, slug= profile_slug)
+    # due to `related_name='links'`
+    # we can access the assigned links for a profile like so
+    links = profile.links.all()
+    context = {
+        'profile': profile,
+        'links': links
+    }
+    return render(req, 'link_tree/profile.html', context= context)
