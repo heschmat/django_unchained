@@ -1,0 +1,19 @@
+{% if form.errors %}
+<p>Please enter the correct username and password.</p>
+{% endif %}
+
+{% if next %}
+    {% comment %} `user` is provided by `django.sessions` {% endcomment %}
+    {% if not user.is_authenticated %}
+        <h1>Please login to view the page.</h1>
+    {% else %}
+        <h1>Please login.</h1>
+    {% endif %} 
+{% endif %}
+
+<form action="{% url 'login' %}" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Login" />
+  <input type="hidden" name="next" value="{{next}}" />
+</form>
