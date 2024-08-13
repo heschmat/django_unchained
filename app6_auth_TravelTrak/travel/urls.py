@@ -1,9 +1,11 @@
 from django.urls import path
 
-from .views import HomeView, TripListView, list_trip
+from .views import HomeView, TripListView, list_trip, TripCreateView
 
 urlpatterns = [
     path('', HomeView.as_view(), name= 'home'),
     path('dashboard/', TripListView.as_view(), name= 'trip-list'),
     path('dashboard_func/', list_trip, name= 'list-trip'),
+    path('dashboard/trip/create', TripCreateView.as_view(), name= 'trip-create'),
 ]
+
