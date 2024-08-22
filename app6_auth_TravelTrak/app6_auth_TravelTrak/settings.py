@@ -130,7 +130,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ================================================================================ #
-MEDIA_URL = '/media/'  # www.mysite.come/media/img1.jpg
+# N.B. Do not add `/` before. i.e., it's 'media/ & not '/media/'
+# '/media/' will give you:
+# [Errno 13] Permission denied: '/media/notes'
+MEDIA_URL = 'media/'  # www.mysite.come/media/img1.jpg
 MEDIA_ROOT = Path(BASE_DIR) / MEDIA_URL  # path to the actual file
 
 # if no next, where should the user go after *login*?
