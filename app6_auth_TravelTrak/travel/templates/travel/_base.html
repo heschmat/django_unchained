@@ -30,9 +30,17 @@
             <div class="mt-auto w-full text-center flex md:flex-col justify-evenly py-2 md:pt-0">
                 <p class="">Hi {{user.username}}</p>
                 <hr class="my-2">
-                <a class="underline" href="{% url 'logout' %}">
+                {% comment %} Django's LogoutView typically expects a POST request to log out a user for security reasons. {% endcomment %}
+                <form id="logout-form" method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="underline bg-transparent border-none cursor-pointer">
+                        Logout
+                    </button>
+                </form>
+
+                {% comment %} <a class="underline" href="{% url 'logout' %}">
                     Logout
-                </a>
+                </a> {% endcomment %}
             </div>
         </div>
         <div class="w-full md:w-full p-10 overflow-auto">

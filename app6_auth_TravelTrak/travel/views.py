@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import (
+    TemplateView,
+    ListView, CreateView,
+)
 
 from .models import Trip, Note
 
@@ -12,6 +15,7 @@ class TripListView(ListView):
 
     def get_queryset(self):
         # Filter trips by the logged-in user
+        # i.e., the user that's making the current request.
         return Trip.objects.filter(owner=self.request.user)
 
 # This is the functional equivalent of the above cbv `TripListView`:
@@ -30,4 +34,3 @@ class TripCreateView(CreateView):
         # owner should be set by default to the logged-in user.
         form.instance.owner = self.request.user
         return super().form_valid(form)
-

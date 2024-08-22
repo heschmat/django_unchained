@@ -1,11 +1,11 @@
 from django.urls import path
 
-from .views import HomeView, TripListView, list_trip, TripCreateView
+from . import views
 
 urlpatterns = [
-    path('', HomeView.as_view(), name= 'home'),
-    path('dashboard/', TripListView.as_view(), name= 'trip-list'),
-    path('dashboard_func/', list_trip, name= 'list-trip'),
-    path('dashboard/trip/create', TripCreateView.as_view(), name= 'trip-create'),
+    path('', views.HomeView.as_view(), name= 'home'),
+    path('dashboard/', views.TripListView.as_view(), name= 'trip-list'),
+    path('dashboard_func/', views.list_trip, name= 'list-trip'),
+    path('dashboard/trip/create', views.TripCreateView.as_view(), name= 'trip-create'),
 ]
 

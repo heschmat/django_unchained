@@ -3,12 +3,12 @@
 {% endif %}
 
 {% if next %}
-    {% comment %} `user` is provided by `django.sessions` {% endcomment %}
+    {% comment %} `user` is provided by `django.sessions` app{% endcomment %}
     {% if not user.is_authenticated %}
         <h1>Please login to view the page.</h1>
     {% else %}
         <h1>Please login.</h1>
-    {% endif %} 
+    {% endif %}
 {% endif %}
 
 <form action="{% url 'login' %}" method="POST">

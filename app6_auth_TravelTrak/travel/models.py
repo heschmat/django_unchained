@@ -11,19 +11,19 @@ class Trip(models.Model):
     country = models.CharField(max_length= 2) # country code
     start_date = models.DateField(blank= True, null= True)
     end_date = models.DateField(blank= True, null= True)
-    owner = models.ForeignKey(User, on_delete= models.CASCADE, related_name= 'trips')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='trips')
 
     def __str__(self):
-        return f'{self.owner.username} => {self.city} -- {self.start_date.year}'
-    
+        return f'{self.owner.username} => {self.city} -- {self.start_date}'
+
 class Note(models.Model):
     ACTIVITIES = (
         ('event', 'Event'),
         ('retreat', 'Retreat'),
         ('general', 'General'),
     )
-    # related_names= 'notes' => to access the notes from a trip: `trip.notes` 
-    trip = models.ForeignKey(Trip, on_delete= models.CASCADE, related_name= 'notes')
+    # related_names= 'notes' => to access the notes from a trip: `trip.notes`
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='notes')
     title = models.CharField(max_length= 50)
     description = models.TextField()
     type = models.CharField(max_length= 10, choices= ACTIVITIES)
