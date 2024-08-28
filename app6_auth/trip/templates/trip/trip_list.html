@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trips</title>
-  </head>
-  <body>
-    {% if user.is_authenticated %}
-    <p>Hi {{ user.username }}</p>
-    {% comment %} Logout Form {% endcomment %}
-    <form action="{% url 'logout' %}" method="POST">
-        {% csrf_token %}
-        <button type="submit">LogOut</button>
-    </form>
-    {% else %}
-    <p>Please <a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
-    <ul>
-      {% for trip in trips %}
-      <li>{{trip.city}} -- {{trip.owner.username}}</li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% extends 'trip/_base.html' %}
+
+{% block content %}
+<h1 class="text-4xl underline underline-offset-4 mb-8">My Trips</h1>
+{% for trip in trips %}
+    <a href="{% url 'trip:home' %}">
+        <div class="bg-gray-50 p-10 rounded shadow my-4 hover:shadow-lg hover:cursor-pointer">
+            <p class="text-lg">
+                {{trip.country}} | {{trip.city}}
+            </p>
+            <p class="text-sm pt-4">
+                {% if trip.start_date %}
+                {{ trip.start_date|date:"F jS, Y" }}
+                {% else %}
+                TBA
+                {% endif %}
+            </p>
+        </div>
+    </a>
+{% endfor %}
+{% endblock content %}
