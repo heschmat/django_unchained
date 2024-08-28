@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trips</title>
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <p>Hi {{ user.username }}</p>
+    {% comment %} Logout Form {% endcomment %}
+    <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">LogOut</button>
+    </form>
+    {% else %}
+    <p>Please <a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
+    <ul>
+      {% for trip in trips %}
+      <li>{{trip.city}} -- {{trip.owner.username}}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
