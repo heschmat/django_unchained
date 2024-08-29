@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd party:
+    "crispy_forms",
+    "crispy_tailwind",
+
     # Local Apps:
     'trip',
 ]
@@ -128,6 +132,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ====================================================================== #
 # ====================================================================== #
 MEDIA_URL = '/media/'  # www.mysite.com/media/img1.png
-MEDIA_ROOT = BASE_DIR / 'images'  # where image is saved
 
+# where images is saved.
+# Each image will be saved into: images/upload_to
+# where `upload_to` is specified in the Model that has a ImageField.
+MEDIA_ROOT = BASE_DIR / 'images'
+
+# login -----------
 LOGIN_REDIRECT_URL = 'trip:list-trip'
+
+# crispy forms: ------
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+
+
