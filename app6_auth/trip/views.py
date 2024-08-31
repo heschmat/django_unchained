@@ -3,7 +3,10 @@ from django.urls import reverse_lazy
 
 from django.views.generic import (
     TemplateView,
-    ListView, CreateView, UpdateView, DeleteView, DetailView,
+    ListView, CreateView, DetailView,
+    # `DeleteView` does not need a template.
+    # `UpdateView` uses the same template as `CreateView`: modelname_form.html
+    UpdateView, DeleteView,
 )
 
 from .models import Trip, Note
@@ -74,3 +77,33 @@ class NoteCreateView(CreateView):
         # User can only create notes for the trips she created.
         form.fields['trip'].queryset = trips
         return form
+
+
+class NoteUpdateView(UpdateView):
+    model = Note
+    success_url = reverse_lazy('trip:list-note')
+    fields = '__all__'
+
+    def get_Form(self):
+        form = super().get_form()
+        trips = Trip.objects.filter(owner=self.request.user)
+        form.fields['trip'].queryset = trips
+        return form
+
+
+class NoteDeleteView(DeleteView):
+    model = Note
+    success_url = reverse_lazy('trip:list-note')
+    # No template required. Send a POST request to the URL.
+
+
+class TripUpdateView(UpdateView):
+    model = Trip
+    success_url = reverse_lazy('trip:list-trip')
+    fields = ['city', 'country', 'start_date', 'duration']
+    # Here, of course we won't be needing to modify the owner/user.
+
+
+class TripDeleteView(DeleteView):
+    model = Trip
+    success_url = reverse_lazy('trip:list-trip')
